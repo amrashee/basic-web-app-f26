@@ -68,5 +68,21 @@ if (query.toLowerCase().includes("which of the following numbers are primes")) {
 
   return numbers.filter(isPrime).join(", ");
 }
+// Exponentiation (supports very large numbers)
+const powerMatch = query.match(/(\d+)\s+to the power of\s+(\d+)/i);
+
+if (powerMatch) {
+  const base = BigInt(powerMatch[1]);
+  const exponent = BigInt(powerMatch[2]);
+
+  return (base ** exponent).toString();
+}
+if (query.toLowerCase().includes(" plus ")) {
+  const numbers = query.match(/\d+/g);
+
+  if (numbers) {
+    return String(numbers.map(Number).reduce((sum, num) => sum + num, 0));
+  }
+}
   return "";
 }
