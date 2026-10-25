@@ -41,5 +41,32 @@ if (query.toLowerCase().includes(" plus ")) {
   }
 
 }
+const subtractionMatch = query.match(/(-?\d+)\s+minus\s+(-?\d+)/i);
+
+if (subtractionMatch) {
+  return String(Number(subtractionMatch[1]) - Number(subtractionMatch[2]));
+}
+if (query.toLowerCase().includes(" plus ")) {
+  const numbers = query.match(/\d+/g);
+
+  if (numbers) {
+    return String(numbers.map(Number).reduce((sum, num) => sum + num, 0));
+  }
+}
+if (query.toLowerCase().includes("which of the following numbers are primes")) {
+  const numbers = query.match(/\d+/g)?.map(Number) ?? [];
+
+  const isPrime = (num: number): boolean => {
+    if (num < 2) return false;
+
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) return false;
+    }
+
+    return true;
+  };
+
+  return numbers.filter(isPrime).join(", ");
+}
   return "";
 }
