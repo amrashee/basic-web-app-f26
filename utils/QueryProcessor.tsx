@@ -19,5 +19,13 @@ export default function QueryProcessor(query: string): string {
     return "amrashee";
   }
 
+  if (query.toLowerCase().includes("which of the following numbers is the largest")) {
+  const numbers = query.match(/\d+/g);
+
+  if (numbers) {
+    return Math.max(...numbers.map(Number)).toString();
+  }
+}
+
   return "";
 }
