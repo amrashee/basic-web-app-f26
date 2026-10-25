@@ -26,6 +26,20 @@ export default function QueryProcessor(query: string): string {
     return Math.max(...numbers.map(Number)).toString();
   }
 }
+if (query.toLowerCase().includes(" plus ")) {
 
+  const match = query.match(/(-?\d+)\s+plus\s+(-?\d+)/i);
+
+  if (match) {
+
+    const num1 = Number(match[1]);
+
+    const num2 = Number(match[2]);
+
+    return (num1 + num2).toString();
+
+  }
+
+}
   return "";
 }
